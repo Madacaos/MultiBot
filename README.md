@@ -10,13 +10,15 @@ You can find the repositories here:
 
 Pengrand: https://github.com/pengrad/java-telegram-bot-api
 
-Cobalt: https://github.com/Auties00/Cobalt"
+Cobalt: https://github.com/Auties00/Cobalt
 
 ## Implementation
-```
-implementation("com.github.madacaos:multibot:master")
-implementation("com.github.auties00:cobalt:0.0.7") //Cobalt (whatsapp)
-implementation("com.github.pengrad:java-telegram-bot-api:7.9.1") //Pengrand (telegram)
+```kts
+dependencies {
+    implementation("com.github.madacaos:multibot:-SNAPSHOT")
+    implementation("com.github.auties00:cobalt:0.0.7") //Cobalt (whatsapp)
+    implementation("com.github.pengrad:java-telegram-bot-api:7.9.1") //Pengrand (telegram)
+}
 ```
 
 ## Initialization
