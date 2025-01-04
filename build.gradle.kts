@@ -11,19 +11,14 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-
     implementation("com.github.auties00:cobalt:0.0.7")
     annotationProcessor("com.github.auties00:cobalt:0.0.7")
     implementation("com.github.pengrad:java-telegram-bot-api:7.9.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+   // implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3") use newer version
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
 kotlin {
     jvmToolchain(21)
 }
