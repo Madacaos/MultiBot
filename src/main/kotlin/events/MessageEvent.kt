@@ -2,6 +2,4 @@ package me.cerasi.events
 
 import me.cerasi.objects.Message
 
-class MessageEvent(val message: Message): Event(message.chat, message.user) {
-    var accepted = false
-}
+class MessageEvent(val message: Message, var accepted: Boolean = false): Event(message.chat, message.user)

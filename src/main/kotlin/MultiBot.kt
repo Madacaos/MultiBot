@@ -19,8 +19,8 @@ import kotlin.jvm.optionals.getOrNull
 
 
 class MultiBot {
-    val whatsappBots = mutableListOf<Whatsapp>()
-    val telegramBots = mutableListOf<TelegramBot>()
+    private val whatsappBots = mutableListOf<Whatsapp>()
+    private val telegramBots = mutableListOf<TelegramBot>()
 
     val listeners = mutableListOf<Listener>()
     val commandList = mutableListOf<Command>()

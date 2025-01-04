@@ -23,8 +23,8 @@ class Chat(var service: Service, var id: String, var name: String, val provider:
     }
 
     fun sendMessage(text: String, documents: MutableList<String> = mutableListOf()): CompletableFuture<SendMessage> {
-        val last = deelayMessage.getOrPut(id) { System.currentTimeMillis() }
-        deelayMessage[id] = (if(System.currentTimeMillis() > last) System.currentTimeMillis() else last) + deelayTime
+        val last = delayMessage.getOrPut(id) { System.currentTimeMillis() }
+        delayMessage[id] = (if(System.currentTimeMillis() > last) System.currentTimeMillis() else last) + DELAY_TIME
 
         val future = CompletableFuture<SendMessage>()
 
@@ -33,25 +33,24 @@ class Chat(var service: Service, var id: String, var name: String, val provider:
         sendMessage.provider = provider
         sendMessage.documents = documents
 
-        // Avvia la coroutine per gestire il delay
+
         CoroutineScope(Dispatchers.IO).launch {
             val delayTime = last - System.currentTimeMillis()
 
             if (delayTime > 0) {
-                delay(delayTime) // Aspetta il tempo di ritardo
+                delay(delayTime)
             }
 
-            // Qui si invia il messaggio
-            sendMessage.send(this@Chat) // Invio del messaggio
-            future.complete(sendMessage) // Completa il future dopo l'invio
+            sendMessage.send(this@Chat)
+            future.complete(sendMessage)
         }
 
         return future
     }
 
     companion object {
-        val deelayMessage = mutableMapOf<String, Long>()
-        val deelayTime: Long = 2 * 1000
+        val delayMessage = mutableMapOf<String, Long>()
+        const val DELAY_TIME: Long = 2 * 1000
 
         fun getChat(id: String, multiBot: MultiBot, provider: Any): Chat? {
             if (provider is TelegramBot)

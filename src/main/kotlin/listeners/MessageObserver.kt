@@ -8,14 +8,14 @@ import kotlin.jvm.optionals.getOrDefault
 class MessageObserver(
     val chat: Chat,
     val user: User? = null,
-    val nullable: Boolean = true,
+    private val nullable: Boolean = true,
     private val action: (MessageEvent, MessageObserver) -> Unit
 ) {
     init {
         register()
     }
 
-    fun register() {
+    private fun register() {
         chat.multiBot.observerManager.register(this)
     }
 
@@ -23,7 +23,6 @@ class MessageObserver(
         chat.multiBot.observerManager.unregister(this)
     }
 
-    // Metodo per eseguire l'azione sull'evento
     fun execute(event: MessageEvent) {
         if (nullable && event.message.text.getOrDefault("null").lowercase().startsWith("annull")) {
             unregister()

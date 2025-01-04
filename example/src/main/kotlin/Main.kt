@@ -9,15 +9,15 @@ fun main() {
     val whatsapp = Whatsapp.webBuilder() // Use the Web api
         .lastConnection() // Deserialize the last connection, or create a new one if it doesn't exist
         .unregistered(QrHandler.toTerminal()) // Print the QR to the terminal
-        .addLoggedInListener { api: Whatsapp ->
+        .addLoggedInListener { _: Whatsapp ->
             System.out.printf(
                 "Connected",
             )
         }.addDisconnectedListener { reason: DisconnectReason? -> System.out.printf("Disconnected: %s%n", reason) }
 
-    var telegram = TelegramBot("your-token")
+    val telegram = TelegramBot("your-token")
 
-    var multiBot = MultiBot()
+    val multiBot = MultiBot()
 
     multiBot.registerTelegramBot(telegram)
     multiBot.registerWhatsappBot(whatsapp)
@@ -28,6 +28,4 @@ fun main() {
 
     multiBot.registerListener(ExampleListener())
     multiBot.registerCommand(ExampleCommand())
-
-    println("Hello World!")
 }
